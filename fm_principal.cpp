@@ -59,7 +59,9 @@ void fm_principal::populaCombo()
     opcoes[22] = std::make_pair(22, "Onças em Libras");
 
     for (int i = 0; i < quantidade; i++)
+    {
         ui->comboBox_conversao->addItem(opcoes[i].second, opcoes[i].first);
+    }
 }
 
 double fm_principal::quilometrosEmMilhas(double quilometros)
@@ -253,13 +255,15 @@ void fm_principal::on_pushButton_converter_clicked()
 
         valor_recebido_em_string = ui->lineEdit_valor->text();
         qDebug() << "valor_recebido_em_string: " << valor_recebido_em_string;
-        if (valor_recebido_em_string.contains(" ")){
+        if (valor_recebido_em_string.contains(" "))
+        {
             quebra_espaco = valor_recebido_em_string.split(" ");
             p1 = quebra_espaco[0];
             qDebug() << "p1: "<< p1;
             p2 = quebra_espaco[1];
             qDebug() << "p2: " << p2;
-            if (p2.contains("/")){
+            if (p2.contains("/"))
+            {
                 quebra_barra = p2.split("/");
                 q1 = quebra_barra[0];
                 qDebug() << "q1: " << q1;
@@ -268,7 +272,9 @@ void fm_principal::on_pushButton_converter_clicked()
             }
             valor_recebido = p1.toDouble() + (q1.toDouble() / q2.toDouble());
 
-        } else if (valor_recebido_em_string.contains("/")){
+        }
+        else if (valor_recebido_em_string.contains("/"))
+        {
             quebra_barra = valor_recebido_em_string.split("/");
             q1 = quebra_barra[0];
             qDebug() << "q1: " << q1;
@@ -278,12 +284,14 @@ void fm_principal::on_pushButton_converter_clicked()
         }
     }
 
-    if (conversao == 0){
+    if (conversao == 0)
+    {
         QMessageBox::warning(this, "", "Selecione a conversão.");
         return;
     }
 
-    switch (conversao) {
+    switch (conversao)
+    {
 
     // 1, "Quilômetros em Milhas"
     case 1:
@@ -426,4 +434,3 @@ void fm_principal::on_pushButton_limpar_clicked()
     ui->label_resultado->clear();
     ui->lineEdit_valor->setFocus();
 }
-
